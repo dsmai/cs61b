@@ -77,6 +77,7 @@ public class Planet {
                 totalNetForceY += calcForceExertedByY(planet);
             }
         }
+
         return totalNetForceY;
     }
 
