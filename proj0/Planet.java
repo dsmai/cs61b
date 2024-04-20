@@ -11,6 +11,16 @@ public class Planet {
 
     public static final double G_const = 6.67e-11;
 
+    // Default constructor
+    public Planet() {
+        xxPos = 0;
+        yyPos = 0;
+        xxVel = 0;
+        yyVel = 0;
+        mass = 0;
+        imgFileName = "";
+    }
+
     // constructor
     public Planet(double xP, double yP, double xV, double yV, double m, String img) {
         xxPos = xP;
