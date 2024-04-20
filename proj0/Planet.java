@@ -77,8 +77,20 @@ public class Planet {
                 totalNetForceY += calcForceExertedByY(planet);
             }
         }
-
         return totalNetForceY;
+    }
+
+    public void update(double dt, double fX, double fY) {
+        double ax = fX / mass;
+        double ay = fY / mass;
+
+        // calculate new velocity
+        xxVel += ax * dt;
+        yyVel += ay * dt;
+
+        // calculate new position
+        xxPos += xxVel * dt;
+        yyPos += yyVel * dt;
     }
 
 }
