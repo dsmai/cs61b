@@ -10,7 +10,7 @@ public class NBody {
         String filename = args[2];
         // read input from files
         double universe_radius = readRadius(filename);
-        // Planet[] planets = readPlanets(filename);
+        Planet[] planets = readPlanets(filename);
 
         // draw
         // first, set scale
@@ -24,35 +24,41 @@ public class NBody {
         // show the galaxy picture
         StdDraw.show();
 
-        // double[] xForces = new double[5];
-        // double[] yForces = new double[5];
-        // for (int i = 0; i <= T; i += dt) {
-        //     for (int index = 0; index < 5; index++) {
-        //         xForces[index] = planets[index].calcNetForceExertedByX(planets);
-        //         yForces[index] = planets[index].calcNetForceExertedByY(planets);
-        //     }
+        double[] xForces = new double[5];
+        double[] yForces = new double[5];
+        for (int i = 0; i <= T; i += dt) {
+            for (int index = 0; index < 5; index++) {
+                xForces[index] = planets[index].calcNetForceExertedByX(planets);
+                yForces[index] = planets[index].calcNetForceExertedByY(planets);
+            }
 
-        //     // call update on each planet
-        //     for (int index = 0; index < 5; index++) {
-        //         planets[index].update(dt, xForces[index], yForces[index]);
-        //     }
+            // call update on each planet
+            for (int index = 0; index < 5; index++) {
+                planets[index].update(dt, xForces[index], yForces[index]);
+            }
 
-        //     // draw the background again
-        //     StdDraw.picture(0, 0, imageToDraw);
+            // draw the background again
+            StdDraw.picture(0, 0, imageToDraw);
 
-        //     // draw all the planets
-        //     for (Planet planet : planets) {
-        //         planet.draw();
-        //     }
+            // draw all the planets
+            for (Planet planet : planets) {
+                planet.draw();
+            }
 
-        //     // Show the offscreen buffer
-        //     StdDraw.show();
+            // Show the offscreen buffer
+            StdDraw.show();
 
-        //     // Pause the animation for 10 milliseconds
-        //     StdDraw.pause(10);
-        // }
+            // Pause the animation for 10 milliseconds
+            StdDraw.pause(10);
+        }
 
-        planetsAnimation(dt, T, filename);
+        StdOut.printf("%d\n", planets.length);
+        StdOut.printf("%.2e\n", universe_radius);
+        for (int i = 0; i < planets.length; i++) {
+            StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+                          planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
+                          planets[i].yyVel, planets[i].mass, planets[i].imgFileName);   
+        }
     }
 
     public static void testAnimation() {
