@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collection; // import the Collection class to sort ArrayList
 
 public class NBody {
-    public static String imageToDraw = "./images/starfield.jpg";
+    private static String imageToDraw = "./images/starfield.jpg";
     public static void main(String[] args) {
         // read input from command line args
         double T = Double.valueOf(args[0]);
@@ -61,7 +61,7 @@ public class NBody {
         }
     }
 
-    public static void testAnimation() {
+    private static void testAnimation() {
         StdDraw.setScale(-2.0, +2.0);
         StdDraw.enableDoubleBuffering();
      
@@ -76,7 +76,7 @@ public class NBody {
         }
     }
 
-    public static void planetsAnimation(double dt, double T, String filename) {
+    private static void planetsAnimation(double dt, double T, String filename) {
         // read planets from file and draw them
         Planet[] planets = readPlanets(filename);
 
@@ -123,7 +123,7 @@ public class NBody {
 
         for (int i = 0; i < planets.length; i++) {
             // create an instance of Planet class, using "new" default constructor
-            planets[i] = new Planet();
+            planets[i] = new Planet(0, 0, 0, 0, 0, "");
 
             planets[i].xxPos = in.readDouble();
             planets[i].yyPos = in.readDouble();
@@ -137,7 +137,7 @@ public class NBody {
     }
 
     // Read Planets but using ArrayList
-    public static ArrayList<Planet> readPlanetsArrayList(String filename) {
+    private static ArrayList<Planet> readPlanetsArrayList(String filename) {
         In in = new In(filename);
 
         int firstItem = in.readInt();
@@ -148,7 +148,7 @@ public class NBody {
 
         for (int i = 0; i < 5; i++) {
             // create an instance of Planet class, using "new" default constructor
-            Planet a_planet = new Planet();
+            Planet a_planet = new Planet(0, 0, 0, 0, 0, "");
 
             a_planet.xxPos = in.readDouble();
             a_planet.yyPos = in.readDouble();

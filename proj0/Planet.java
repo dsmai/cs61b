@@ -10,17 +10,7 @@ public class Planet {
     public String imgFileName;
 
     // G constant definition
-    public static final double G_const = 6.67e-11;
-
-    // Default constructor, initialize to all 0
-    public Planet() {
-        xxPos = 0.0;
-        yyPos = 0.0;
-        xxVel = 0.0;
-        yyVel = 0.0;
-        mass = 0.0;
-        imgFileName = "";
-    }
+    private static final double G_const = 6.67e-11;
 
     /**
      * Detailed constructor
