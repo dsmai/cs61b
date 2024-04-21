@@ -2,6 +2,95 @@ import java.util.ArrayList;
 import java.util.Collection; // import the Collection class to sort ArrayList
 
 public class NBody {
+    public static String imageToDraw = "./images/starfield.jpg";
+    public static void main(String[] args) {
+        // read input from command line args
+        double T = Double.valueOf(args[0]);
+        double dt = Double.valueOf(args[1]);
+        String filename = args[2];
+        // read input from files
+        double universe_radius = readRadius(filename);
+        // Planet[] planets = readPlanets(filename);
+
+        // draw
+        // first, set scale
+        StdDraw.setScale(-universe_radius, universe_radius);
+        StdDraw.enableDoubleBuffering();
+
+        // clear the drawing window
+        StdDraw.clear();
+        StdDraw.picture(0, 0, imageToDraw);
+
+        // show the galaxy picture
+        StdDraw.show();
+
+        // double[] xForces = new double[5];
+        // double[] yForces = new double[5];
+        // for (int i = 0; i <= T; i += dt) {
+        //     for (int index = 0; index < 5; index++) {
+        //         xForces[index] = planets[index].calcNetForceExertedByX(planets);
+        //         yForces[index] = planets[index].calcNetForceExertedByY(planets);
+        //     }
+
+        //     // call update on each planet
+        //     for (int index = 0; index < 5; index++) {
+        //         planets[index].update(dt, xForces[index], yForces[index]);
+        //     }
+
+        //     // draw the background again
+        //     StdDraw.picture(0, 0, imageToDraw);
+
+        //     // draw all the planets
+        //     for (Planet planet : planets) {
+        //         planet.draw();
+        //     }
+
+        //     // Show the offscreen buffer
+        //     StdDraw.show();
+
+        //     // Pause the animation for 10 milliseconds
+        //     StdDraw.pause(10);
+        // }
+
+        planetsAnimation(dt, T, filename);
+    }
+
+    public static void testAnimation() {
+        StdDraw.setScale(-2.0, +2.0);
+        StdDraw.enableDoubleBuffering();
+     
+        for (double t = 0.0; true; t += 0.02) {
+            double x = Math.sin(t);
+            double y = Math.cos(t);
+            StdDraw.clear();
+            StdDraw.filledCircle(x, y, 0.1);
+            StdDraw.filledCircle(-x, -y, 0.1);
+            StdDraw.show();
+            StdDraw.pause(20);
+        }
+    }
+
+    public static void planetsAnimation(double dt, double T, String filename) {
+        // read planets from file and draw them
+        Planet[] planets = readPlanets(filename);
+
+        for (int i = 0; i <= T; i += dt) {
+            // update
+            for (Planet planet : planets) {
+                planet.update(dt, planet.calcNetForceExertedByX(planets), planet.calcNetForceExertedByY(planets));
+            }
+
+            StdDraw.picture(0, 0, imageToDraw);
+            // draw (copy from offscreen canvas to onscreen canvas)
+            for (Planet planet : planets) {
+                planet.draw();
+            }
+
+            StdDraw.show();
+            StdDraw.pause(10);
+        }
+    }
+
     public static double readRadius(String filename) {
         In in = new In(filename);
         int firstItem = in.readInt();
