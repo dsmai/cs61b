@@ -24,16 +24,16 @@ public class NBody {
         // show the galaxy picture
         StdDraw.show();
 
-        double[] xForces = new double[5];
-        double[] yForces = new double[5];
+        double[] xForces = new double[planets.length];
+        double[] yForces = new double[planets.length];
         for (int i = 0; i <= T; i += dt) {
-            for (int index = 0; index < 5; index++) {
+            for (int index = 0; index < planets.length; index++) {
                 xForces[index] = planets[index].calcNetForceExertedByX(planets);
                 yForces[index] = planets[index].calcNetForceExertedByY(planets);
             }
 
             // call update on each planet
-            for (int index = 0; index < 5; index++) {
+            for (int index = 0; index < planets.length; index++) {
                 planets[index].update(dt, xForces[index], yForces[index]);
             }
 
@@ -99,11 +99,11 @@ public class NBody {
 
     public static double readRadius(String filename) {
         In in = new In(filename);
-        int firstItem = in.readInt();
-        double secondItem = in.readDouble();
+        int number_of_planets = in.readInt();
+        double universe_radius = in.readDouble();
 
         // return the radius of the universe in that planet
-        return secondItem;
+        return universe_radius;
     }
 
     public static Planet[] readPlanets(String filename) {
@@ -111,17 +111,17 @@ public class NBody {
         In in = new In(filename);
 
         // read the first and second item
-        int firstItem = in.readInt();
-        double secondItem = in.readDouble();
+        int number_of_planets = in.readInt();
+        double universe_radius = in.readDouble();
 
-        // Create an array of Planet, using "new" ketwords
-        Planet[] planets = new Planet[5];
+        // Create an array of Planet, using "new" keywords
+        Planet[] planets = new Planet[number_of_planets];
 
         // starting from line 3, loop through each line until find line staring with [!], then stop
         // for (int i = 0; i < planets.length; i++)
         // in each line, assign planets[i].xxPos, planets[i].yyPos etc from in.readDouble() (first 5, last one is in.readString())
 
-        for (int i = 0; i < planets.length; i++) {
+        for (int i = 0; i < number_of_planets; i++) {
             // create an instance of Planet class, using "new" default constructor
             planets[i] = new Planet(0, 0, 0, 0, 0, "");
 
@@ -140,13 +140,13 @@ public class NBody {
     private static ArrayList<Planet> readPlanetsArrayList(String filename) {
         In in = new In(filename);
 
-        int firstItem = in.readInt();
-        double secondItem = in.readDouble();
+        int number_of_planets = in.readInt();
+        double universe_radius = in.readDouble();
 
         // Initiate an array list of Planets
         ArrayList<Planet> planets_list = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < number_of_planets; i++) {
             // create an instance of Planet class, using "new" default constructor
             Planet a_planet = new Planet(0, 0, 0, 0, 0, "");
 
