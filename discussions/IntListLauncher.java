@@ -30,7 +30,7 @@ public class IntListLauncher {
          * Get size of linkedlist using recurssion
          * Important: need a base case => the next elemenet is null, or rest is null
          * If rest is null, return 1
-         * Need a function that calls itself
+         * Need a function that calls itself, and go down so it can converge to the base case => rest
          * @return
          */
         public int size() {
@@ -67,10 +67,24 @@ public class IntListLauncher {
             IntList p = this;
             int position = 0;
             while (position < i) {
-                p = p.rest;
+                p = p.rest; // assignment so you can iterate
                 position++;
             }
             return p.first;
+        }
+
+        /**
+         * get() method but using recursion
+         * Need a base case: get(0) => return first
+         * Need a way to iterate => using rest
+         * The idea is to count how many times until i reachs 0. ie: if i = 2, it takes 2 times/operations to get to 0
+         * When reaches get(0) => return first
+         *  */ 
+        public int getByRecursion(int i) {
+            if (i == 0) {
+                return first;
+            }
+            return rest.getByRecursion(i - 1);
         }
     }
 }
