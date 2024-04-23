@@ -6,7 +6,8 @@ public class IntListLauncher {
 
         // System.out.println("Here is my simple linked list: " + mylist.first + ", " + mylist.rest.first + ", " + mylist.rest.rest.first);
         System.out.println("Size: " + mylist.size() + ", " + mylist.iterativeSize());
-        System.out.println(mylist.get(Integer.valueOf(args[0])));
+        System.out.println(mylist.first);
+        // System.out.println(mylist.get(Integer.valueOf(args[0])));
     }
 
     // IntList here is a nested class under IntListLauncher, so it acts like an instance variable
@@ -50,7 +51,7 @@ public class IntListLauncher {
          */
         public int iterativeSize() {
             int totalSize = 0;
-            IntList p = this;
+            IntList p = this; // Use "p" because to remind yourself that it is a pointer (it is holding a memory address)
             while (p != null) {
                 totalSize++;
                 p = p.rest;
@@ -64,7 +65,7 @@ public class IntListLauncher {
          * @return
          */
         public int get(int i) {
-            IntList p = this;
+            IntList p = this; //pointer, store the address of "this" object
             int position = 0;
             while (position < i) {
                 p = p.rest; // assignment so you can iterate

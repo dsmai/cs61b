@@ -53,7 +53,7 @@ public class IntList {
         }
         IntList res = new IntList(L.first * L.first, null);
         IntList ptr = res;
-        L = L.rest;
+        L = L.rest; // move pointer to the next element
         while (L != null) {
             ptr.rest = new IntList(L.first * L.first, null);
             L = L.rest;
@@ -82,7 +82,25 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        // Need a variable to save the original head of A
+        IntList originalHead = A;
+        // iterate all the way to the end of A
+//        if (A == null) {
+//            if (B == null) {
+//                return null;
+//            } else {
+//                A = B;
+//                return B;
+//            }
+//        }
+
+        while (A.rest != null) {
+            A = A.rest;
+        }
+        // After exsiting the while loop, A is the last element. It stores address of the last element.
+
+        A.rest = B;
+        return originalHead;
     }
 
     /**
@@ -91,7 +109,26 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        // Copy all items of A to a new linkedlist, and then add B after that
+
+        // first, copy all item of A to a new list. I also need a variable to keep track of the tail of newList
+        // Create a new list
+        IntList newList = new IntList(A.first, null);
+        IntList tail = newList; // Because we dont want to change the newList, like newList = newList.rest => bad, lose object
+        A = A.rest;
+
+        while (A != null) {
+            tail.rest = new IntList(A.first, null);
+            // Update A
+            A = A.rest;
+
+            //Update tail
+            tail = tail.rest;
+        }
+        // After the while loop, done copying to newList
+        // Now attach B to tail
+        tail.rest = B;
+        return newList; // cannot return tail, because tail is just the end of the newList after done copying A to it
     }
 
 
