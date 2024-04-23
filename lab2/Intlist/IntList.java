@@ -45,6 +45,19 @@ public class IntList {
     }
 
     /**
+     * dSquareList but non-destructive and using recursive
+     */
+    public static void dSquareListRecursive(IntList L) {
+        // base case, if element is null, do nothing
+        if (L != null) {
+            // if the node is not null, update value
+            L.first = L.first * L.first;
+            // then call recursive
+            dSquareListRecursive(L.rest);
+        }
+    }
+
+    /**
      * Returns a list equal to L with all elements squared. Non-destructive.
      */
     public static IntList squareListIterative(IntList L) {
@@ -77,7 +90,7 @@ public class IntList {
 
     /**
      * Returns a list consisting of the elements of A followed by the
-     * *  elements of B.  May modify items of A. Don't use 'new'.
+     * *  elements of B.  May modify items of A. Don't use 'new'. Destructive
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
@@ -104,8 +117,26 @@ public class IntList {
     }
 
     /**
+     * Destructive, using recursion
+     * @param A
+     * @param B
+     * @return
+     */
+    public static IntList dcatenateRecursive(IntList A, IntList B) {
+        // base case => null
+        if (A == null) {
+            return null;
+        }
+
+        if (B == null) {
+            return null;
+        }
+        return null;
+    }
+
+    /**
      * Returns a list consisting of the elements of A followed by the
-     * * elements of B.  May NOT modify items of A.  Use 'new'.
+     * * elements of B.  May NOT modify items of A.  Use 'new'. Non-destructive
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
@@ -129,6 +160,14 @@ public class IntList {
         // Now attach B to tail
         tail.rest = B;
         return newList; // cannot return tail, because tail is just the end of the newList after done copying A to it
+    }
+
+    /**
+     * Non-destructive. Using recursion
+     *
+     */
+    public static IntList catenateRecursive(IntList A, IntList B) {
+        return null;
     }
 
 
