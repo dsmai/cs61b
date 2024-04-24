@@ -35,11 +35,11 @@ public class IntListLauncher {
          * @return
          */
         public int size() {
-            if (rest == null) {
+            if (this.rest == null) {
                 return 1;
             }
             // if not base case, call itself (remember need to have a way to go down to the base case). Also add one because have to count the current one
-            return 1 + rest.size();
+            return 1 + this.rest.size();
         }
 
         /**
