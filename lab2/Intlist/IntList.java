@@ -97,15 +97,15 @@ public class IntList {
         //TODO:  fill in method
         // Need a variable to save the original head of A
         IntList originalHead = A;
-        // iterate all the way to the end of A
-//        if (A == null) {
-//            if (B == null) {
-//                return null;
-//            } else {
-//                A = B;
-//                return B;
-//            }
-//        }
+
+        // Edge case: A is null and B is null
+        if (A == null) {
+            return null;
+        }
+
+        if (B == null) {
+            return A;
+        }
 
         while (A.rest != null) {
             A = A.rest; // This just means "reassign A to point to the next node in A." Local variable change. Original list A is unchanged
@@ -145,6 +145,15 @@ public class IntList {
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
         // Copy all items of A to a new linkedlist, and then add B after that
+
+        // Edge case: A is null and B is null
+        if (A == null) {
+            return null;
+        }
+
+        if (B == null) {
+            return A;
+        }
 
         // first, copy all item of A to a new list. I also need a variable to keep track of the tail of newList
         // Create a new list
