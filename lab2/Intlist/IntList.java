@@ -45,7 +45,7 @@ public class IntList {
     }
 
     /**
-     * dSquareList but non-destructive and using recursive
+     * dSquareList but destructive and using recursive
      */
     public static void dSquareListRecursive(IntList L) {
         // base case, if element is null, do nothing
@@ -108,30 +108,34 @@ public class IntList {
 //        }
 
         while (A.rest != null) {
-            A = A.rest;
+            A = A.rest; // This just means "reassign A to point to the next node in A." Local variable change. Original list A is unchanged
         }
         // After exsiting the while loop, A is the last element. It stores address of the last element.
 
-        A.rest = B;
+        A.rest = B; // this assignment right here is why the method is destructive. Updating the rest field of the original object
+
+        // Quiz time, fun time. If instead of A.rest = B, I do A = B
+        // A = B (this means copy the bits of B to A. And B is holding the address of the head of linked list B
+        // It means it would reassign local variable A to point to the head of B
+        // This would not modify the original list A
+        // The effect is ony local to the method, and the original list A outside of the method is unchanged
         return originalHead;
     }
 
     /**
-     * Destructive, using recursion
+     * Castenate linked list but Destructive and using recursion
      * @param A
      * @param B
      * @return
      */
-    public static IntList dcatenateRecursive(IntList A, IntList B) {
-        // base case => null
-        if (A == null) {
-            return null;
+    public static void dcatenateRecursive(IntList A, IntList B) {
+        if (A != null) { // base case
+            if (A.rest != null) {
+                dcatenateRecursive(A.rest, B);
+            } else {
+                A.rest = B;
+            }
         }
-
-        if (B == null) {
-            return null;
-        }
-        return null;
     }
 
     /**
@@ -167,7 +171,14 @@ public class IntList {
      *
      */
     public static IntList catenateRecursive(IntList A, IntList B) {
-        return null;
+        // base case: If A is null, just return B => null
+        if (A == null) {
+            return B;
+        } // This means if already past the last node (previous.rest is null), return head of B
+
+        // Recursive call, have a way to go down to base case (somehow go to when A passed in is null) => traverse the list
+        // Recursively do A.rest until "null", by then attach head of B
+        return new IntList(A.first, catenateRecursive(A.rest, B));
     }
 
 

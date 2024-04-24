@@ -65,6 +65,15 @@ public class IntListTest {
     }
 
     @Test
+    public void testDcatenateRecursive() {
+        IntList A = IntList.of(3, 2, 1);
+        IntList B = IntList.of(5, 6, 7);
+        IntList exp = IntList.of(3, 2, 1, 5, 6, 7);
+        IntList.dcatenateRecursive(A, B);
+        assertEquals(exp, A);
+    }
+
+    @Test
     public void testCatenate() {
         IntList A = IntList.of(1, 2, 3);
         IntList B = IntList.of(4, 5, 6);
