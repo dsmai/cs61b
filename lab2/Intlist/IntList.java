@@ -100,11 +100,7 @@ public class IntList {
 
         // Edge case: A is null and B is null
         if (A == null) {
-            return null;
-        }
-
-        if (B == null) {
-            return A;
+            return B;
         }
 
         while (A.rest != null) {
@@ -148,11 +144,7 @@ public class IntList {
 
         // Edge case: A is null and B is null
         if (A == null) {
-            return null;
-        }
-
-        if (B == null) {
-            return A;
+            return B;
         }
 
         // first, copy all item of A to a new list. I also need a variable to keep track of the tail of newList
