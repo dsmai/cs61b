@@ -28,6 +28,12 @@ public class SLList {
         size += 1;
     }
 
+    public void removeFirst() {
+        sentinel.next = first.next;
+        first = sentinel.next;
+        size -= 1;
+    }
+
     public int getFirst() {
         return first.item;
     }
@@ -47,6 +53,10 @@ public class SLList {
         size += 1;
     }
 
+    public void removeLast() {
+        last.next = null;
+    }
+
     public void addLastIterative(int number) {
 
         // condition to prevent NullPointerException? (because we check ptr.next, what if ptr is null?)
@@ -59,6 +69,7 @@ public class SLList {
         }
         // when out of while loop, we are at the last node
         ptr.next = new IntNode(number, null);
+
         last = ptr.next;
 
         size += 1;
