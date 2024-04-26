@@ -1,3 +1,5 @@
+import javax.sql.rowset.serial.SQLInputImpl;
+
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
 	
@@ -17,6 +19,11 @@ public class LinkedListDequeTest {
 			return false;
 		}
 		return true;
+	}
+
+	/* Utility method for checking equals. */
+	public static boolean checkEquals(int expected, int actual) {
+		return expected == actual;
 	}
 
 	/* Prints a nice message based on whether a test passed. 
@@ -60,10 +67,9 @@ public class LinkedListDequeTest {
 
 	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
 	public static void addRemoveTest() {
-
 		System.out.println("Running add/remove test.");
 
-		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
 		// should be empty 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
@@ -78,9 +84,49 @@ public class LinkedListDequeTest {
 		printTestStatus(passed);
 	}
 
+	/** Add 3 items, then do getRecursive, also check getFirst and getLast */
+	public static void addGetTest() {
+		System.out.println("Running add/get test.");
+
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+		// check empty
+		boolean passed = checkEmpty(true, lld1.isEmpty());
+
+		lld1.addFirst(10);
+		passed = checkEmpty(false, lld1.isEmpty()) && passed;
+
+		lld1.addLast(20);
+
+		lld1.addLast(30);
+
+		lld1.addLast(40);
+
+		lld1.removeLast();
+
+		lld1.addFirst(5);
+
+		boolean passedGetFirst = checkEquals(5, lld1.getFirst());
+		boolean passedGetLast = checkEquals(30, lld1.getLast());
+		boolean passedGetRecursive = checkEquals(20, lld1.getRecursive(2));
+		boolean passedGetRecursiveAnother = checkEquals(20, lld1.getRecursive(2));
+
+		printTestStatus(passed);
+		printTestStatus(passedGetFirst);
+		printTestStatus(passedGetLast);
+		printTestStatus(passedGetRecursive);
+		printTestStatus(passedGetRecursiveAnother);
+	}
+
+	public static void simpleTest() {
+		LinkedListDeque<Integer> lld = new LinkedListDeque<>(10);
+		lld.addFirst(5);
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
-		addIsEmptySizeTest();
-		addRemoveTest();
+//		addIsEmptySizeTest();
+//		addRemoveTest();
+		addGetTest();
+//		simpleTest();
 	}
 } 
