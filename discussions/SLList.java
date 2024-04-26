@@ -148,6 +148,7 @@ public class SLList {
     }
 
     /** Private helper method */
+    // Return size of list starting from a given node
     private static int sizeRecursive(IntNode ptr) {
         if (ptr.next == null) {
             return 0;
@@ -167,6 +168,6 @@ public class SLList {
     // }
 
     public int sizeRecursive() {
-        return sizeRecursive(sentinel);
+        return sizeRecursive(sentinel); // Starting from sentinel
     }
 }
