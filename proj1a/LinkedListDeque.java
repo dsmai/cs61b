@@ -3,8 +3,8 @@ public class LinkedListDeque<T> {
 
     // instance variables
     private Node sentinel;
-    private Node first;
-    private Node last;
+//    private Node first;
+//    private Node last;
     private int size;
 
     // Nested class
@@ -24,64 +24,68 @@ public class LinkedListDeque<T> {
     // Default constructor: empty deque
     public LinkedListDeque() {
         sentinel = new Node(null, null, null); // What to pass in as first parameter here?
+        sentinel.prev = sentinel;
+        sentinel.next = sentinel;
         size = 0;
     }
 
     // Another constructor, create with 1st element
-    public LinkedListDeque(T item) {
-        first = new Node(item, null, null);
-        last = first;
-        sentinel = new Node(null, last, first);
-        first.prev = sentinel;
-        size += 1;
-    }
+//    public LinkedListDeque(T item) {
+//        first = new Node(item, null, null);
+//        last = first;
+//        sentinel = new Node(null, last, first);
+//        first.prev = sentinel;
+//        size += 1;
+//    }
 
-    public LinkedListDequeAnother(T item) {
+    public LinkedListDeque(T item) {
         Node newNode = new Node(item, null, null);
         sentinel = new Node(null, newNode, newNode);
+        newNode.prev = sentinel;
+        newNode.next = sentinel;
         size += 1;
     }
+
+//    public void addFirst(T item) {
+//        Node newNode = new Node(item, sentinel, first);
+//        sentinel.next = newNode;
+//        first.prev = newNode;
+//        first = newNode;
+//        size += 1;
+//    }
 
     public void addFirst(T item) {
-        Node newNode = new Node(item, sentinel, first);
-        sentinel.next = newNode;
-        first.prev = newNode;
-        first = newNode;
-        size += 1;
-    }
-
-    public void addFirstAnother(T item) {
         Node newNode = new Node(item, sentinel, sentinel.next);
         sentinel.next.prev = newNode;
         sentinel.next = newNode;
         size += 1;
     }
 
-    public void addLast(T item) {
-        Node newNode = new Node(item, last, null);
-        last.next = newNode;
-        sentinel.prev = newNode;
-        last = newNode;
-        size += 1;
-    }
+//    public void addLast(T item) {
+//        Node newNode = new Node(item, last, null);
+//        last.next = newNode;
+//        sentinel.prev = newNode;
+//        last = newNode;
+//        size += 1;
+//    }
 
-    public void addLastAnother(T item) {
+    public void addLast(T item) {
         Node newNode = new Node(item, sentinel.prev, null);
         sentinel.prev.next = newNode;
         sentinel.prev = newNode;
         size += 1;
     }
 
-    public T removeFirst() {
-        Node resultNode = first;
-        sentinel.next = first.next;
-        first.next.prev = sentinel;
-        first = first.next;
-        size -= 1;
-        return resultNode.item; // need to think about null case?
-    }
+//    public T removeFirst() {
+//        Node resultNode = first;
+//        sentinel.next = first.next;
+//        first.next.prev = sentinel;
+//        first = first.next;
+//        size -= 1;
+//        return resultNode.item; // need to think about null case?
+//    }
 
-    public T removeFirstAnother() {
+    public T removeFirst() {
         Node resultNode = sentinel.next;
         sentinel.next =  sentinel.next.next;
         sentinel.next.prev = sentinel;
@@ -89,16 +93,16 @@ public class LinkedListDeque<T> {
         return resultNode.item; // need to think about null case?
     }
 
-    public T removeLast() {
-        Node resultNode = last;
-        last.prev.next = null;
-        sentinel.prev = last.prev;
-        last = last.prev;
-        size -= 1;
-        return resultNode.item;
-    }
+//    public T removeLast() {
+//        Node resultNode = last;
+//        last.prev.next = null;
+//        sentinel.prev = last.prev;
+//        last = last.prev;
+//        size -= 1;
+//        return resultNode.item;
+//    }
 
-    public T removeLastAnother() {
+    public T removeLast() {
         Node resultNode = sentinel.prev;
         sentinel.prev.prev.next = null;
         sentinel.prev = sentinel.prev.prev;
@@ -122,11 +126,18 @@ public class LinkedListDeque<T> {
             Node ptr = sentinel.next;
 
             //Use for loop to traverse the deque instead
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < index; i++) {
                 // travers the list by moving the pointer
                 ptr = ptr.next;
             }
             return ptr.item;
         }
+    }
+
+    public void printDeque() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(get(i) + " ");
+        }
+        System.out.println();
     }
 }
