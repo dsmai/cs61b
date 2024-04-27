@@ -17,5 +17,6 @@ public class Launcher {
         mylist.addLast(80);
         System.out.println(mylist.size());
         System.out.println(mylist.length());
+        mylist.printAList();
     }
 }
