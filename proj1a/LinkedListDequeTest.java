@@ -117,16 +117,38 @@ public class LinkedListDequeTest {
 		printTestStatus(passedGetRecursiveAnother);
 	}
 
-	public static void simpleTest() {
-		LinkedListDeque<Integer> lld = new LinkedListDeque<>(10);
-		lld.addFirst(5);
+	public static void deepCopyConstructorTest() {
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<>(10);
+		lld1.addFirst(5);
+		lld1.addLast(15);
+		lld1.addLast(20);
+		LinkedListDeque<Integer> lld2 = new LinkedListDeque<>(lld1);
+
+		// now modify the second lld2
+		lld2.addLast(30);
+		boolean passed = checkEquals(lld1.getFirst(), lld2.getFirst());
+		passed = checkEquals(lld1.get(1), lld2.get(1)) && passed;
+		passed = checkEquals(lld1.get(2), lld2.get(2)) && passed;
+		passed = checkEquals(lld1.get(3), lld2.get(3)) && passed;
+
+		printTestStatus((passed));
+	}
+
+	public static void deepCopyConstructorTest2() {
+		LinkedListDeque<Pug> lld1 = new LinkedListDeque<>(new Pug());
+		lld1.addLast(new Pug("Bi", 2));
+		lld1.addLast(new Pug("Binh", 3));
+		lld1.addLast(new Pug("Teo", 5));
+		LinkedListDeque<Pug> lld2 = new LinkedListDeque<>(lld1);
+
+		lld2.set(1, new Pug("Harry", 6));
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 //		addIsEmptySizeTest();
 //		addRemoveTest();
-		addGetTest();
-//		simpleTest();
+//		addGetTest();
+		deepCopyConstructorTest2();
 	}
 } 

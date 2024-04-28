@@ -22,6 +22,7 @@ public class AList<Item> {
         usageRatio = size/items.length;
     }
 
+    // sizeDown() method is to release memory of the AList (nulling, so garbage collector can collect) when usage ratio is is below 0.25
     private void sizeDown() {
         int newSize = items.length / 2;
 

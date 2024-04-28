@@ -35,10 +35,21 @@ public class LinkedListDeque<T> {
         size += 1;
     }
 
-    // Copy constructor, pass in another LinkedListDeque
-    public LinkedListDeque(LinkedListDeque lld) {
-        this.sentinel = lld.sentinel;
-        this.size = lld.size;
+    // Deep Copy constructor, pass in another LinkedListDeque. The result should be a completely different object
+    // Modification to the new linkedlistdeque should not change the orignal one
+    public LinkedListDeque(LinkedListDeque other) {
+        this(); // invoke the default constructor explicitly
+
+        // assign the original first to ptr
+        Node ptr = other.sentinel.next;
+
+        // have to traverse the entire list, and copy node.item one by one
+        for (int i = 0; i < other.size; i++) {
+            // Create the next new node, behaves like addLast
+            this.addLast(ptr.item);
+            // advance pointer original
+            ptr = ptr.next;
+        }
     }
 
     public void addFirst(T item) {
@@ -49,7 +60,7 @@ public class LinkedListDeque<T> {
     }
 
     public void addLast(T item) {
-        Node newNode = new Node(item, sentinel.prev, null);
+        Node newNode = new Node(item, sentinel.prev, sentinel);
         sentinel.prev.next = newNode;
         sentinel.prev = newNode;
         size += 1;
@@ -94,6 +105,17 @@ public class LinkedListDeque<T> {
             }
             return ptr.item;
         }
+    }
+
+    public void set(int index, T setItem) {
+        if (index >= size) {
+            return;
+        }
+        Node ptr = sentinel.next;
+        for (int i = 0; i < index; i++) {
+            ptr = ptr.next;
+        }
+        ptr.item = setItem;
     }
 
     // Private helper method that remove first node
