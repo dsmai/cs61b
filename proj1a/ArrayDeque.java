@@ -1,14 +1,14 @@
-public class ArrayDeque {
+public class ArrayDeque<T> {
     /** Array-based list implementation */
     private int size;
-    private int[] items;
+    private T[] items;
     private int nextFirst; // index of the array when next addFirst will go to
     private int nextLast; // index of the array when next addLast will go to
     private double usageRatio;
 
     // Default constructor, create empty array deque
     public ArrayDeque() {
-        items = new int[8]; // {0, 0, 0, 0, 0, 0, 0, 0}
+        items = (T[]) new Object[8]; // {0, 0, 0, 0, 0, 0, 0, 0}
         nextFirst = 3;
         nextLast = 4;
         size = 0;
@@ -16,7 +16,7 @@ public class ArrayDeque {
     }
 
     private void resize(int newSize) {
-        int[] newArray = new int[newSize];
+        T[] newArray = (T[]) new Object[newSize];
         System.arraycopy(this.items, 0, newArray, 0, size);
         this.items = newArray;
         usageRatio = size / items.length;
@@ -40,7 +40,7 @@ public class ArrayDeque {
         }
     }
 
-    public void addFirst(int item) {
+    public void addFirst(T item) {
         // check if run out of allocated memory box
         if (size == items.length) {
             resize(size * 2);
@@ -56,7 +56,7 @@ public class ArrayDeque {
         usageRatio = size / items.length;
     }
 
-    public void addLast(int item) {
+    public void addLast(T item) {
         // check if run out of allocated memory box
         if (size == items.length) {
             resize(size * 2);
@@ -97,6 +97,9 @@ public class ArrayDeque {
         // update the nextFirst pointer
         nextFirst = getFirstIndex();
 
+        // null it
+        items[nextFirst] = null;
+
         size--;
         usageRatio = size / items.length;
         return first;
@@ -112,6 +115,9 @@ public class ArrayDeque {
         // update the nextLast pointer
         nextLast = getLastIndex();
 
+        // null it
+        items[nextLast] = null;
+
         size--;
         usageRatio = size / items.length;
         return last;
@@ -121,7 +127,7 @@ public class ArrayDeque {
         return items[index];
     }
 
-    public int getFirst() {
+    public T getFirst() {
         // what if nextFirst is already at the end, or (size - 1) index
         if (nextFirst == size - 1) {
             return items[0];
@@ -139,7 +145,7 @@ public class ArrayDeque {
         }
     }
 
-    public int getLast() {
+    public T getLast() {
         // what if nextLast is already at the beginning, or 0 index
         if (nextLast == 0) {
             return items[size - 1];
