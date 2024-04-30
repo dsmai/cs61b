@@ -46,7 +46,9 @@ public class ArrayDeque<T> {
             resize(size * 2);
         }
 
-        // how do we treat edge case, when nextFirst is already at 0 => need to loop forward to the end of array
+        // how do we treat edge case?
+        // when nextFirst is already at 0
+        // => need to loop forward to the end of array
         items[nextFirst] = item;
 
         nextFirst--; // push nextFirst forward by 1
@@ -127,7 +129,7 @@ public class ArrayDeque<T> {
         return items[index];
     }
 
-    public T getFirst() {
+    private T getFirst() {
         // what if nextFirst is already at the end, or (size - 1) index
         if (nextFirst == size - 1) {
             return items[0];
@@ -145,7 +147,7 @@ public class ArrayDeque<T> {
         }
     }
 
-    public T getLast() {
+    private T getLast() {
         // what if nextLast is already at the beginning, or 0 index
         if (nextLast == 0) {
             return items[size - 1];

@@ -6,10 +6,10 @@ public class LinkedListDeque<T> {
     private int size;
 
     // Nested class
-    public class Node {
-        public Node prev;
-        public T item;
-        public Node next;
+    private class Node {
+        private Node prev;
+        private T item;
+        private Node next;
 
         // constructor
         public Node(T item, Node prev, Node next) {
@@ -35,7 +35,8 @@ public class LinkedListDeque<T> {
         size += 1;
     }
 
-    // Deep Copy constructor, pass in another LinkedListDeque. The result should be a completely different object
+    // Deep Copy constructor, pass in another LinkedListDeque.
+    // The result should be a completely different object
     // Modification to the new linkedlistdeque should not change the orignal one
     public LinkedListDeque(LinkedListDeque other) {
         this(); // invoke the default constructor explicitly
@@ -148,7 +149,8 @@ public class LinkedListDeque<T> {
         if (index == 0) {
             return start.item;
         } else {
-            // call recursive, move pointer 1 next for everytime index decrease by 1, until reaches 0
+            // call recursive, move pointer 1 next for everytime
+            // index decrease by 1, until reaches 0
             return getRecursiveHelper(start.next, index - 1);
         }
     }
