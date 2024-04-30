@@ -86,13 +86,13 @@ public class ArrayDeque<T> {
         System.out.println();
     }
 
-    public int removeFirst() {
+    public T removeFirst() {
         // edge case, array deque is already empty, return null
         if (isEmpty()) {
-            return -1;
+            return null;
         }
 
-        int first = getFirst();
+        T first = getFirst();
 
         // update the nextFirst pointer
         nextFirst = getFirstIndex();
@@ -105,12 +105,12 @@ public class ArrayDeque<T> {
         return first;
     }
 
-    public int removeLast() {
+    public T removeLast() {
         if (isEmpty()) {
-            return -1;
+            return null;
         }
 
-        int last = getLast();
+        T last = getLast();
 
         // update the nextLast pointer
         nextLast = getLastIndex();
@@ -123,7 +123,7 @@ public class ArrayDeque<T> {
         return last;
     }
 
-    public int get(int index) {
+    public T get(int index) {
         return items[index];
     }
 
