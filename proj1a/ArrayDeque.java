@@ -48,7 +48,7 @@ public class ArrayDeque<T> {
         // I forgot to do something with nextFirst and nextLast when resize?
         // Update nextFirst and nextLast with respect to newArray
         nextFirst = (newArray.length / 4) - 1;
-        nextLast = (newArray.length - 1) - nextFirst;
+        nextLast = nextFirst + size + 1;
     }
 
     /**
@@ -158,7 +158,7 @@ public class ArrayDeque<T> {
 
         // halve the array length if usage ratio is below 0.25
         if (usageRatio < 0.25 && items.length >= 16) {
-            resize(size / 2);
+            resize(items.length / 2);
         }
         return first;
     }

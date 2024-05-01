@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+
 /** Performs some basic array deque tests. */
 public class ArrayDequeTest {
     public static boolean checkEmpty(boolean expected, boolean actual) {
@@ -62,8 +64,39 @@ public class ArrayDequeTest {
         printTestStatus(passed);
     }
 
+    public static void getTest() {
+        ArrayDeque<Integer> ard = new ArrayDeque<>();
+        ard.addFirst(0);
+        int var1 = ard.get(0);
+        int var2 = ard.removeLast();
+
+        ard.addLast(3);
+        ard.addFirst(4);
+        ard.addFirst(5);
+        ard.addLast(6);
+        int var3 = ard.get(2);
+        int var4 = ard.get(3);
+
+        ard.addFirst(9);
+        ard.addFirst(10);
+        ard.addLast(11);
+        ard.addLast(12);
+        ard.addFirst(13);
+        ard.addLast(14);
+        int var5 = ard.removeLast();
+        int var6 = ard.removeLast();
+        int var7 = ard.removeLast();
+        int var8 = ard.removeLast();
+        int var9 = ard.get(2);
+
+        int var10 = ard.removeLast();
+        int var11 = ard.removeFirst();
+        int var12 = ard.removeFirst();
+    }
+
     // main driver
     public static void main(String[] args) {
-        addFrontTest();
+//        addFrontTest();
+        getTest();
     }
 }
