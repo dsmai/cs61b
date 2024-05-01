@@ -27,32 +27,33 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    public LinkedListDeque(T item) {
-        Node newNode = new Node(item, null, null);
-        sentinel = new Node(null, newNode, newNode);
-        newNode.prev = sentinel;
-        newNode.next = sentinel;
-        size += 1;
-    }
+//    public LinkedListDeque(T item) {
+//        Node newNode = new Node(item, null, null);
+//        sentinel = new Node(null, newNode, newNode);
+//        newNode.prev = sentinel;
+//        newNode.next = sentinel;
+//        size += 1;
+//    }
 
-    // Deep Copy constructor, pass in another LinkedListDeque.
-    // The result should be a completely different object
-    // Modification to the new linkedlistdeque should not change the orignal one
-    public LinkedListDeque(LinkedListDeque other) {
-        this(); // invoke the default constructor explicitly
+//    // Deep Copy constructor, pass in another LinkedListDeque.
+//    // The result should be a completely different object
+//    // Modification to the new linkedlistdeque should not change the orignal one
+//    public LinkedListDeque(LinkedListDeque other) {
+//        this(); // invoke the default constructor explicitly
+//
+//        // assign the original first to ptr
+//        Node ptr = other.sentinel.next;
+//
+//        // have to traverse the entire list, and copy node.item one by one
+//        for (int i = 0; i < other.size; i++) {
+//            // Create the next new node, behaves like addLast
+//            this.addLast(ptr.item);
+//            // advance pointer original
+//            ptr = ptr.next;
+//        }
+//    }
 
-        // assign the original first to ptr
-        Node ptr = other.sentinel.next;
-
-        // have to traverse the entire list, and copy node.item one by one
-        for (int i = 0; i < other.size; i++) {
-            // Create the next new node, behaves like addLast
-            this.addLast(ptr.item);
-            // advance pointer original
-            ptr = ptr.next;
-        }
-    }
-
+    // Something wrong here
     public void addFirst(T item) {
         Node newNode = new Node(item, sentinel, sentinel.next);
         sentinel.next.prev = newNode;
@@ -60,6 +61,7 @@ public class LinkedListDeque<T> {
         size += 1;
     }
 
+    // Something wrong
     public void addLast(T item) {
         Node newNode = new Node(item, sentinel.prev, sentinel);
         sentinel.prev.next = newNode;
@@ -67,6 +69,7 @@ public class LinkedListDeque<T> {
         size += 1;
     }
 
+    // Something wrong
     public T removeFirst() {
         Node firstNode = sentinel.next;
         sentinel.next =  sentinel.next.next;
@@ -75,6 +78,7 @@ public class LinkedListDeque<T> {
         return firstNode.item; // need to think about null case?
     }
 
+    // Something wrong
     public T removeLast() {
         Node lastNode = sentinel.prev;
         sentinel.prev.prev.next = null;
@@ -83,10 +87,12 @@ public class LinkedListDeque<T> {
         return lastNode.item;
     }
 
+    // Something wrong
     public boolean isEmpty() {
         return (size == 0);
     }
 
+    // Something wrong
     public int size() {
         return size;
     }
@@ -108,7 +114,7 @@ public class LinkedListDeque<T> {
         }
     }
 
-    public void set(int index, T setItem) {
+    private void set(int index, T setItem) {
         if (index >= size) {
             return;
         }
@@ -129,19 +135,19 @@ public class LinkedListDeque<T> {
 
     // This looks like it is destructive.
     // New strategy, copy the linkedlistdeque to a new list (but removing the "first")
-    public T getRecursiveAnother(int index) {
-        // base case:
-        if (index >= size) {
-            return null;
-        } else if (index == 0) {
-            return sentinel.next.item;
-        } else {
-            // create a new deque (copy of the current deque)
-            LinkedListDeque<T> newlld = new LinkedListDeque<>(this);
-            newlld.removeFirstAnother(); // call this to pop first item from the newlld
-            return newlld.getRecursive(index - 1); // call recursively on the newlld
-        }
-    }
+//    private T getRecursiveAnother(int index) {
+//        // base case:
+//        if (index >= size) {
+//            return null;
+//        } else if (index == 0) {
+//            return sentinel.next.item;
+//        } else {
+//            // create a new deque (copy of the current deque)
+//            LinkedListDeque<T> newlld = new LinkedListDeque<>(this);
+//            newlld.removeFirstAnother(); // call this to pop first item from the newlld
+//            return newlld.getRecursive(index - 1); // call recursively on the newlld
+//        }
+//    }
 
     /** Return item at certain index, starting from "start" node */
     private T getRecursiveHelper(Node start, int index) {
@@ -162,11 +168,11 @@ public class LinkedListDeque<T> {
         return getRecursiveHelper(sentinel.next, index);
     }
 
-    public T getFirst() {
+    private T getFirst() {
         return sentinel.next.item;
     }
 
-    public T getLast() {
+    private T getLast() {
         return sentinel.prev.item;
     }
 

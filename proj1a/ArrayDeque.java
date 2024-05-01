@@ -157,7 +157,7 @@ public class ArrayDeque<T> {
         usageRatio = (double) size / items.length;
 
         // halve the array length if usage ratio is below 0.25
-        if (usageRatio < 0.25) {
+        if (usageRatio < 0.25 && items.length >= 16) {
             resize(size / 2);
         }
         return first;
@@ -171,7 +171,7 @@ public class ArrayDeque<T> {
         T last = getLast();
 
         // null it
-        items[nextLast] = null;
+        items[getLastIndex()] = null;
 
         // update the nextLast pointer
         nextLast = getLastIndex();
@@ -183,7 +183,8 @@ public class ArrayDeque<T> {
         usageRatio = (double) size / items.length;
 
         // halve the array length if usage ratio is below 0.25
-        if (usageRatio < 0.25) {
+        // for array of length 16 or more
+        if (usageRatio < 0.25 && items.length >= 16) {
             resize(items.length / 2);
         }
         return last;
