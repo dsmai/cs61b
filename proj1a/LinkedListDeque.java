@@ -55,7 +55,10 @@ public class LinkedListDeque<T> {
 
     // Something wrong here
     public void addFirst(T item) {
+        // Create a new node
         Node newNode = new Node(item, sentinel, sentinel.next);
+
+        // link the current nodes to the new node
         sentinel.next.prev = newNode;
         sentinel.next = newNode;
         size += 1;
@@ -71,6 +74,11 @@ public class LinkedListDeque<T> {
 
     // Something wrong
     public T removeFirst() {
+        // edge case: remove from empty deck
+        if (isEmpty()) {
+            return null;
+        }
+
         Node firstNode = sentinel.next;
         sentinel.next =  sentinel.next.next;
         sentinel.next.prev = sentinel;
@@ -80,8 +88,13 @@ public class LinkedListDeque<T> {
 
     // Something wrong
     public T removeLast() {
+        // edge case: remove from empty deck
+        if (isEmpty()) {
+            return null;
+        }
+
         Node lastNode = sentinel.prev;
-        sentinel.prev.prev.next = null;
+        sentinel.prev.prev.next = sentinel;
         sentinel.prev = sentinel.prev.prev;
         size -= 1;
         return lastNode.item;
@@ -89,7 +102,7 @@ public class LinkedListDeque<T> {
 
     // Something wrong
     public boolean isEmpty() {
-        return (size == 0);
+        return size == 0;
     }
 
     // Something wrong
@@ -165,6 +178,7 @@ public class LinkedListDeque<T> {
         if (index >= size) {
             return null;
         }
+        // call getRecursiveHelper() starting from "first" node
         return getRecursiveHelper(sentinel.next, index);
     }
 
