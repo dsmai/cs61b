@@ -115,14 +115,21 @@ public class ArrayDeque<T> {
 
         T first = getFirst();
 
+        // null it
+        items[getFirstIndex()] = null;
+
         // update the nextFirst pointer
         nextFirst = getFirstIndex();
 
-        // null it
-        items[nextFirst] = null;
-
         size--;
+
+        // update usage ratio
         usageRatio = (double) size / items.length;
+
+        // halve the array length if usage ratio is below 0.25
+        if (usageRatio < 0.25) {
+            resize(size / 2);
+        }
         return first;
     }
 
@@ -133,14 +140,21 @@ public class ArrayDeque<T> {
 
         T last = getLast();
 
-        // update the nextLast pointer
-        nextLast = getLastIndex();
-
         // null it
         items[nextLast] = null;
 
+        // update the nextLast pointer
+        nextLast = getLastIndex();
+
         size--;
+
+        // update usage ratio
         usageRatio = (double) size / items.length;
+
+        // halve the array length if usage ratio is below 0.25
+        if (usageRatio < 0.25) {
+            resize(items.length / 2);
+        }
         return last;
     }
 

@@ -30,6 +30,16 @@ public class ArrayDequeTest {
         ard.addLast(-5);
         ard.removeLast();
         ard.removeLast();
+        ard.removeLast();
+        ard.removeLast();
+        ard.removeLast();
+        ard.removeLast();
+        ard.removeLast();
+        ard.removeLast();
+        ard.removeLast();
+        ard.removeLast();
+        ard.removeLast();
+        ard.removeLast();
         ard.printDeque();
         System.out.println("Size: " + ard.size());
         System.out.println("Length: " + ard.getLength());
