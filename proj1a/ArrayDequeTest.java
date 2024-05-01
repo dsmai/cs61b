@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 /** Performs some basic array deque tests. */
 public class ArrayDequeTest {
     public static boolean checkEmpty(boolean expected, boolean actual) {
