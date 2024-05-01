@@ -1,10 +1,10 @@
 public class ArrayDeque<T> {
     /** Array-based list implementation */
-    private int size;
-    private T[] items;
-    private int nextFirst; // index of the array when next addFirst will go to
-    private int nextLast; // index of the array when next addLast will go to
-    private double usageRatio;
+    public int size;
+    public T[] items;
+    public int nextFirst; // index of the array when next addFirst will go to
+    public int nextLast; // index of the array when next addLast will go to
+    public double usageRatio;
 
     // Default constructor, create empty array deque
     public ArrayDeque() {
@@ -17,26 +17,38 @@ public class ArrayDeque<T> {
 
     private void resize(int newSize) {
         T[] newArray = (T[]) new Object[newSize];
-        System.arraycopy(this.items, 0, newArray, 0, size);
+//        System.arraycopy(this.items, 0, newArray, 0, size);
+        // Copy the old array to the new bigger array, start copying from index [nextFirst + 1] till [nextLast]
+        int current = 0;
+        for (int i = nextFirst + 1; current < size; i++) {
+            if (i == items.length) {
+                i = 0;
+            }
+            newArray[(newArray.length / 4) + current] = this.items[i];
+            current++;
+        }
         this.items = newArray;
-        usageRatio = size / items.length;
+        usageRatio = (double) size / items.length;
+        // I forgot to do something with nextFirst and nextLast when resize?
+        nextFirst = (newArray.length / 4) - 1;
+        nextLast = (newArray.length - 1) - nextFirst;
     }
 
     private void updateNextFirst() {
-        if (nextFirst == size) {
+        if (nextFirst == items.length) {
             nextFirst = 0;
         }
         if (nextFirst == -1) {
-            nextFirst = size - 1;
+            nextFirst = items.length - 1;
         }
     }
 
     private void updateNextLast() {
-        if (nextLast == size) {
+        if (nextLast == items.length) {
             nextLast = 0;
         }
         if (nextLast == -1) {
-            nextLast = size - 1;
+            nextLast = items.length - 1;
         }
     }
 
@@ -55,7 +67,7 @@ public class ArrayDeque<T> {
         updateNextFirst();
 
         size++;
-        usageRatio = size / items.length;
+        usageRatio = (double) size / items.length;
     }
 
     public void addLast(T item) {
@@ -70,7 +82,7 @@ public class ArrayDeque<T> {
         updateNextLast();
 
         size++;
-        usageRatio = size / items.length;
+        usageRatio = (double) size / items.length;
     }
 
     public boolean isEmpty() {
@@ -82,8 +94,15 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        for (int i = 0; i < size; i++) {
-            System.out.print(items[i]);
+        // Have to print from nextFirst + 1 to nextLast - 1
+        int current = 0;
+
+        for (int i = nextFirst + 1; current < size; i++) {
+            if ( i == items.length) {
+                i = 0;
+            }
+            System.out.print(items[i] + " ");
+            current++;
         }
         System.out.println();
     }
@@ -103,7 +122,7 @@ public class ArrayDeque<T> {
         items[nextFirst] = null;
 
         size--;
-        usageRatio = size / items.length;
+        usageRatio = (double) size / items.length;
         return first;
     }
 
@@ -121,7 +140,7 @@ public class ArrayDeque<T> {
         items[nextLast] = null;
 
         size--;
-        usageRatio = size / items.length;
+        usageRatio = (double) size / items.length;
         return last;
     }
 
@@ -163,5 +182,13 @@ public class ArrayDeque<T> {
         } else {
             return nextLast - 1;
         }
+    }
+
+    public int getLength() {
+        return items.length;
+    }
+
+    public double getUsageRatio() {
+        return usageRatio;
     }
 }
