@@ -13,6 +13,15 @@ public class Palindrome {
     }
 
     public boolean isPalindrome(String word) {
-        return false;
+        // turn the String into a Deque
+        Deque<Character> myDeque = wordToDeque(word);
+
+        boolean passed = true;
+        // loop through the deque and compare it
+        while (myDeque.size() > 1) {
+            // pop item from front and back and compare
+            passed = myDeque.removeFirst() == myDeque.removeLast();
+        }
+        return passed;
     }
 }

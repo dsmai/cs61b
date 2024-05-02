@@ -24,7 +24,14 @@ public class TestPalindrome {
 
     @Test
     public void testIsPalindromeFalse() {
-        String word = "hibi";
+        String word = "horse";
         assertFalse(palindrome.isPalindrome(word));
+    }
+
+    @Test
+    public void testIsPalindromeEdge() {
+        String word1 = "";
+        String word2 = "a";
+        assertTrue(palindrome.isPalindrome(word1) && palindrome.isPalindrome(word2));
     }
 }
