@@ -21,6 +21,23 @@ public class Palindrome {
         while (myDeque.size() > 1) {
             // pop item from front and back and compare
             passed = myDeque.removeFirst() == myDeque.removeLast();
+            if (passed == false) {
+                break;
+            }
+        }
+        return passed;
+    }
+
+    public boolean isPalindrome(String word, CharacterComparator cc) {
+        Deque<Character> myDeque = wordToDeque(word);
+
+        boolean passed = true;
+
+        while (myDeque.size() > 1) {
+            passed = cc.equalChars(myDeque.removeFirst(), myDeque.removeLast());
+            if (passed == false) {
+                break;
+            }
         }
         return passed;
     }
