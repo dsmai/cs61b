@@ -38,8 +38,9 @@ public class TestPalindrome {
 
     @Test
     public void testPalindrome() {
-        String word1 = "flake";
         CharacterComparator cc = new OffByOne();
-        assertTrue(palindrome.isPalindrome(word1, cc));
+        assertTrue(palindrome.isPalindrome("flake", cc));
+        assertFalse(palindrome.isPalindrome("racecar", cc));
     }
 }
+
