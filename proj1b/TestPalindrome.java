@@ -42,6 +42,8 @@ public class TestPalindrome {
     public void testPalindrome() {
         CharacterComparator cc = new OffByOne();
         assertTrue(palindrome.isPalindrome("flake", cc));
+        assertFalse(palindrome.isPalindrome("Flake", cc));
+        assertTrue(palindrome.isPalindrome("&lak%", cc));
         assertFalse(palindrome.isPalindrome("racecar", cc));
     }
 }
