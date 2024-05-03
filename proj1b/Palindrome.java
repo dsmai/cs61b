@@ -21,7 +21,7 @@ public class Palindrome {
         while (myDeque.size() > 1) {
             // pop item from front and back and compare
             passed = myDeque.removeFirst() == myDeque.removeLast();
-            if (passed == false) {
+            if (!passed) {
                 break;
             }
         }
@@ -35,7 +35,7 @@ public class Palindrome {
 
         while (myDeque.size() > 1) {
             passed = cc.equalChars(myDeque.removeFirst(), myDeque.removeLast());
-            if (passed == false) {
+            if (!passed) {
                 break;
             }
         }

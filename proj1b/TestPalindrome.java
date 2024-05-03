@@ -26,7 +26,9 @@ public class TestPalindrome {
         String word2 = "";
         String word3 = "a";
 
-        boolean passed = palindrome.isPalindrome(word2) && palindrome.isPalindrome(word3) && palindrome.isPalindrome(word1);
+        boolean passed = palindrome.isPalindrome(word2)
+                && palindrome.isPalindrome(word3)
+                && palindrome.isPalindrome(word1);
         assertTrue(passed);
     }
 
