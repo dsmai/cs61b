@@ -94,7 +94,7 @@ public class ArrayDeque<T> implements Deque<T> {
         // check if run out of allocated memory box
         // if yes, resize up
         if (size == items.length) {
-            resize(size * 2);
+            resize(items.length * 2);
         }
 
         items[nextFirst] = item;
@@ -116,7 +116,7 @@ public class ArrayDeque<T> implements Deque<T> {
         // check if run out of allocated memory box
         // if yes, resize up
         if (size == items.length) {
-            resize(size * 2);
+            resize(items.length * 2);
         }
 
         items[nextLast] = item;
