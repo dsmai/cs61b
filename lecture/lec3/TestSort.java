@@ -32,7 +32,20 @@ public class TestSort {
         Assert.assertArrayEquals(expected, input);
     }
 
+    // Adding unit test
+    public static void testFindSmallest() {
+        String[] input = {"i", "love", "miu", "a", "lot"};
+        String expected = "a";
+
+        // call the findSmallest method of class Sort
+        String actual = Sort.findSmallest(input);
+
+        // Unit test
+        Assert.assertEquals(expected, actual);
+    }
+
     public static void main(String[] args) {
         testSort();
+        testFindSmallest();
     }
 }
