@@ -8,7 +8,7 @@ public class ArraySet<Item> implements Set<Item> {
 
     // Default constructor
     public ArraySet() {
-        items = (Item[]) new Object[8];
+        items = (Item[]) new Object[4];
         size = 0;
         usageRatio = 0.0;
     }
@@ -16,7 +16,7 @@ public class ArraySet<Item> implements Set<Item> {
     // Methods
 
     // private helper method to resize (up or down) array
-    private void resize(int newSize) {
+    public void resize(int newSize) {
         Item[] newArray = (Item[]) new Object[newSize];
 
         // Copy to the new array
@@ -29,15 +29,24 @@ public class ArraySet<Item> implements Set<Item> {
         usageRatio = (double) size / newArray.length;
     }
 
+    // O(n)
     // private helper method to return index of value
     // return -1 means the item is not in the set
-    private int search_index(Item value) {
+    public int search_index(Item value) {
         for (int i = 0; i < size; i++) {
-            if (items[i] == value) {
+            if (items[i].equals(value)) { // use equals method for object comparison
                 return i;
             }
         }
         return -1;
+    }
+
+    public double getUsageRatio() {
+        return usageRatio;
+    }
+
+    public int getLength() {
+        return items.length;
     }
 
     // O(1)
