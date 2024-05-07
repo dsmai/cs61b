@@ -102,4 +102,12 @@ public class ArraySet<Item> implements Set<Item> {
         index = search_index(value);
         return index != -1;
     }
+
+    // Remove all items, throw away the reference so garbage collector can collect
+    @Override
+    public void clear() {
+        items = (Item[]) new Object[4];
+        size = 0;
+        usageRatio = 0.0;
+    }
 }
