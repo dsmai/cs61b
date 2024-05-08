@@ -1,50 +1,33 @@
-import org.junit.Assert;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 
 public class TestSort {
-    public static void testSort() {
-        String[] input = {"miu", "is", "a", "pug"};
-        String[] expected = {"a", "is", "miu", "pug"};
-
-        // Call the sort method, it will be a static
-        // or non-instance method
-        Sort.sort(input);
-
-        // checking if the output is correct
-        for (int i = 0; i < input.length; i++) {
-            if (!input[i].equals(expected[i])) {
-                System.out.println("Mismatch in position " + i + ", expected: " + expected[i] + ", but got: " + input[i] + ".");
-                return;
-            }
-        }
-
-/*        // Or I can do this
-        if (Arrays.equals(input, expected)) {
-            System.out.println("Error");
-        }*/
-    }
-
-    public static void testSortJunit() {
+    @Test
+    public void testSort() {
         String[] input = {"miu", "is", "a", "pug"};
         String[] expected = {"a", "is", "miu", "pug"};
         Sort.sort(input);
-        Assert.assertArrayEquals(expected, input);
+        assertArrayEquals(expected, input);
     }
 
-    // Adding unit test
-    public static void testFindSmallest() {
-        String[] input = {"i", "love", "miu", "a", "lot"};
-        String expected = "a";
-
-        // call the findSmallest method of class Sort
-        String actual = Sort.findSmallest(input);
-
-        // Unit test
-        Assert.assertEquals(expected, actual);
+    @Test
+    public void testFindSmallest() {
+        String[] input = {"miu", "is", "a", "pug"};
+        int expected = 2;
+        int actual = Sort.findSmallest(input, 0);
+        assertEquals(expected, actual);
     }
 
-    public static void main(String[] args) {
-        testFindSmallest();
+    @Test
+    public void testSwap() {
+        String[] input = {"miu", "is", "a", "pug"};
+        int a = 0;
+        int b = 2;
+        String[] expected = {"a", "is", "miu", "pug"};
+        Sort.swap(input, a, b);
+        assertArrayEquals(expected, input);
     }
 }
