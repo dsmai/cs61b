@@ -50,4 +50,19 @@ public class TestSLList {
 
         myList.insert(100, 3);
     }
+
+    @Test
+    public void testReverse() {
+        SLList myList = new SLList();
+        myList.addFirst(15);
+        myList.addFirst(10);
+        myList.addFirst(5);
+        myList.addLast(100);
+        int[] beforeReverse = myList.toArray();
+        myList.reverse();
+        int[] expected = {100, 15, 10, 5};
+//        SLList newList = myList.reverseNonDestructive();
+        int[] actual = myList.toArray();
+        assertArrayEquals(expected, actual);
+    }
 }
