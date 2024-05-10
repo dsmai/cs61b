@@ -195,6 +195,7 @@ public class SLList {
         return arr;
     }
 
+    // destructive reverse
     public void reverse() {
         IntNode ptr = sentinel;
         int originalSize = size;
@@ -228,5 +229,22 @@ public class SLList {
             newList.addFirst(ptr.item);
         }
         return newList;
+    }
+
+    public void reverseRecursive() {
+        sentinel.next = recursiveHelper(sentinel.next);
+    }
+
+    // private helper for recursive reverse
+    private IntNode recursiveHelper(IntNode front) {
+        if (front == null || front.next == null) {
+            // base case
+            return front;
+        } else {
+            IntNode reversed = recursiveHelper(front.next);
+            front.next.next = front;
+            front.next = null;
+            return reversed;
+        }
     }
 }
